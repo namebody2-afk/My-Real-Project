@@ -3,12 +3,12 @@
 {% block title %}SEL Center — Home{% endblock %}
 {% block content %}
 <section class="home_banner_area">
-    <div class="banner_inner d-flex align-items-center"><div class="container"><div class="banner_content"><h5>The joy of home owning</h5><h3>Find Your New Home</h3><p style="color:#fff;opacity:.9">{{ houses|length }} ta uy · {{ cities|length }} ta shahar · Django + PostgreSQL (Asia/Tashkent)</p><a class="main_btn" href="/admin/">Admin — uy qo'shish</a></div></div></div>
-    <div class="container"><div class="advanced_search"><h3>Search Properties for</h3><p style="color:#777">Demo qidiruv — filtr keyingi darsda ulanadi (hozir barcha uylar ko'rsatilgan)</p></div></div>
+    <div class="banner_inner d-flex align-items-center"><div class="container"><div class="banner_content"><h5>The joy of home owning</h5><h3>Find Your New Home</h3><p style="color:#fff;opacity:.9">{{ houses|length }} ta uy · {{ cities|length }} ta shahar — ishonchli variantlar</p><a class="main_btn" href="#properties">Uylarni ko'rish</a></div></div></div>
+    <div class="container"><div class="advanced_search"><h3>Search Properties for</h3><p style="color:#777">Shahar va narx bo'yicha qidiruv — tez orada</p></div></div>
 </section>
-<section class="welcome_area p_120"><div class="container"><div class="row welcome_inner"><div class="col-lg-6"><div class="welcome_img"><img class="img-fluid" src="{% static 'img/welcome-1.jpg' %}" alt=""></div></div><div class="col-lg-6"><div class="welcome_text"><h4>Welcome to SEL Center</h4><p>Bu — ustoz bergan <b>Real State Multi</b> shabloni, endi Django bilan jonlangan: <b>City → House (FK)</b>, admin, PostgreSQL, annotate Count.</p><div class="row"><div class="col-sm-4"><div class="wel_item"><i class="lnr lnr-database"></i><h4>${{ houses|length }}+</h4><p>Properties</p></div></div><div class="col-sm-4"><div class="wel_item"><i class="lnr lnr-book"></i><h4>{{ cities|length }}</h4><p>Cities</p></div></div><div class="col-sm-4"><div class="wel_item"><i class="lnr lnr-users"></i><h4>{{ agents|length }}</h4><p>Agents</p></div></div></div></div></div></div></div></section>
+<section class="welcome_area p_120"><div class="container"><div class="row welcome_inner"><div class="col-lg-6"><div class="welcome_img"><img class="img-fluid" src="{% static 'img/welcome-1.jpg' %}" alt=""></div></div><div class="col-lg-6"><div class="welcome_text"><h4>Welcome to SEL Center</h4><p>SEL Center — ko'chmas mulk markazi. Toshkent va Samarqand bo'ylab tekshirilgan uylar va tajribali agentlar.</p><div class="row"><div class="col-sm-4"><div class="wel_item"><i class="lnr lnr-database"></i><h4>${{ houses|length }}+</h4><p>Properties</p></div></div><div class="col-sm-4"><div class="wel_item"><i class="lnr lnr-book"></i><h4>{{ cities|length }}</h4><p>Cities</p></div></div><div class="col-sm-4"><div class="wel_item"><i class="lnr lnr-users"></i><h4>{{ agents|length }}</h4><p>Agents</p></div></div></div></div></div></div></div></section>
 
-<section class="properties_area" id="properties"><div class="container"><div class="main_title"><h2>Our Top Rated Properties</h2><p>Django'dan kelayotgan haqiqiy uylar ({{ houses|length }} ta) — qo'shish uchun /admin/ → Houses</p></div>
+<section class="properties_area" id="properties"><div class="container"><div class="main_title"><h2>Our Top Rated Properties</h2><p>Tanlangan uylar — eng yaxshi takliflar</p></div>
 {% if houses %}
 <div class="row properties_inner">
 {% for h in houses %}
@@ -18,11 +18,11 @@
 {% endfor %}
 </div>
 {% else %}
-<div class="text-center p_30"><p>Hali uylar yo'q — /admin/ da qo'shing. Namuna: Toshkent/Samarqand allaqachon bor (agar ecoverde_db ishlatilsa).</p></div>
+<div class="text-center p_30"><p>Hozircha uylar yo'q</p></div>
 {% endif %}
 </div></section>
 
-<section class="cities_area p_120"><div class="container"><div class="main_title"><h2>Demandable Cities</h2><p>Cities — annotate(house_count=Count('house')) — qancha uy borligi bilan</p></div>
+<section class="cities_area p_120"><div class="container"><div class="main_title"><h2>Demandable Cities</h2><p>Shaharlar bo'yicha uylar</p></div>
 {% if cities %}
 <div class="row cities_inner">
 {% for c in cities %}
@@ -33,12 +33,12 @@
 {% endfor %}
 </div>
 {% else %}
-<p class="text-center">Shaharlar yo'q — /admin/ → Cities</p>
+<p class="text-center">Shaharlar yo'q</p>
 {% endif %}
 </div></section>
 
 {% if agents %}
-<section class="p_120" style="background:#f9f9ff"><div class="container"><div class="main_title"><h2>Our Agents</h2><p>is_staff=True, is_superuser=False</p></div><div class="row">
+<section class="p_120" style="background:#f9f9ff"><div class="container"><div class="main_title"><h2>Our Agents</h2><p>Professional agentlar jamoasi</p></div><div class="row">
 {% for a in agents %}
 <div class="col-lg-3 col-md-6"><div class="text-center p_20"><div style="width:80px;height:80px;line-height:80px;border-radius:50%;background:#0f172a;color:#d4a017;margin:0 auto;font-size:28px;font-weight:800">{{ a.username|slice:":1"|upper }}</div><h5 style="margin-top:12px">{{ a.get_full_name|default:a.username }}</h5><p>@{{ a.username }}</p></div></div>
 {% endfor %}
