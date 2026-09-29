@@ -9,7 +9,6 @@
 <main class="hf-shell">
   <div class="hf-card">
 
-    <!-- Left visual panel -->
     <section class="hf-visual" style="background-image: url('{% static 'images/bg_2.jpg' %}');">
       <div class="hf-visual__overlay"></div>
       <div class="hf-visual__content">
@@ -27,7 +26,6 @@
       </div>
     </section>
 
-    <!-- Right form panel -->
     <section class="hf-form-panel">
       <a href="/" class="hf-back"><span class="fa fa-arrow-left" aria-hidden="true"></span> Back to Home</a>
 
@@ -45,7 +43,6 @@
       <form method="post" enctype="multipart/form-data" class="hf-form">
         {% csrf_token %}
 
-        <!-- Title -->
         <div class="hf-field">
           <label for="id_title">Property Title</label>
           <div class="hf-input">
@@ -55,7 +52,6 @@
           {% for error in form.title.errors %}<small class="hf-error">{{ error }}</small>{% endfor %}
         </div>
 
-        <!-- Type & Price -->
         <div class="hf-two-col">
           <div class="hf-field">
             <label for="id_type">Listing Type</label>
@@ -79,7 +75,6 @@
           </div>
         </div>
 
-        <!-- City -->
         <div class="hf-field">
           <label for="id_city">City</label>
           <div class="hf-select">
@@ -94,7 +89,6 @@
           {% for error in form.city.errors %}<small class="hf-error">{{ error }}</small>{% endfor %}
         </div>
 
-        <!-- Address -->
         <div class="hf-field">
           <label for="id_address">Address</label>
           <div class="hf-input">
@@ -104,7 +98,6 @@
           {% for error in form.address.errors %}<small class="hf-error">{{ error }}</small>{% endfor %}
         </div>
 
-        <!-- Rooms / Floor / Total Floors -->
         <div class="hf-three-col">
           <div class="hf-field">
             <label for="id_room_count">Rooms</label>
@@ -132,7 +125,6 @@
           </div>
         </div>
 
-        <!-- Area -->
         <div class="hf-field">
           <label for="id_area">Area (sq ft)</label>
           <div class="hf-input">
@@ -142,14 +134,12 @@
           {% for error in form.area.errors %}<small class="hf-error">{{ error }}</small>{% endfor %}
         </div>
 
-        <!-- Description -->
         <div class="hf-field">
           <label for="id_description">Description</label>
           <textarea name="description" id="id_description" placeholder="Describe the property — features, condition, surroundings…" required>{{ request.POST.description|default:'' }}</textarea>
           {% for error in form.description.errors %}<small class="hf-error">{{ error }}</small>{% endfor %}
         </div>
 
-        <!-- Image -->
         <div class="hf-field">
           <label>Property Image</label>
           <div class="hf-file">
