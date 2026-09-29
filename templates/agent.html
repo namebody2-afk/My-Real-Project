@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Team — SEL Center{% endblock %}
+{% block content %}
+<section class="banner_area" style="background:#0f172a"><div class="container"><h2 style="color:#fff;padding:60px 0">Our Agents</h2></div></section>
+<section class="p_120"><div class="container"><div class="row">
+{% for a in agents %}
+<div class="col-lg-3 col-md-6"><div class="text-center" style="border:1px solid #eee;padding:20px;margin-bottom:20px"><div style="width:70px;height:70px;background:#0f172a;color:#d4a017;border-radius:50%;line-height:70px;margin:0 auto;font-weight:800">{{ a.username|slice:":1"|upper }}</div><h5 style="margin-top:10px">{{ a.get_full_name|default:a.username }}</h5><p>@{{ a.username }}</p></div></div>
+{% empty %}<p class="col-12 text-center">Agentlar yo'q — /admin/ → Users → is_staff</p>{% endfor %}
+</div></div></section>
+{% endblock %}

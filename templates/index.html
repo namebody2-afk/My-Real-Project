@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}SEL Center — Home{% endblock %}
+{% block content %}
+<section class="home_banner_area">
+    <div class="banner_inner d-flex align-items-center"><div class="container"><div class="banner_content"><h5>The joy of home owning</h5><h3>Find Your New Home</h3><p style="color:#fff;opacity:.9">{{ houses|length }} ta uy · {{ cities|length }} ta shahar · Django + PostgreSQL (Asia/Tashkent)</p><a class="main_btn" href="/admin/">Admin — uy qo'shish</a></div></div></div>
+    <div class="container"><div class="advanced_search"><h3>Search Properties for</h3><p style="color:#777">Demo qidiruv — filtr keyingi darsda ulanadi (hozir barcha uylar ko'rsatilgan)</p></div></div>
+</section>
+<section class="welcome_area p_120"><div class="container"><div class="row welcome_inner"><div class="col-lg-6"><div class="welcome_img"><img class="img-fluid" src="{% static 'img/welcome-1.jpg' %}" alt=""></div></div><div class="col-lg-6"><div class="welcome_text"><h4>Welcome to SEL Center</h4><p>Bu — ustoz bergan <b>Real State Multi</b> shabloni, endi Django bilan jonlangan: <b>City → House (FK)</b>, admin, PostgreSQL, annotate Count.</p><div class="row"><div class="col-sm-4"><div class="wel_item"><i class="lnr lnr-database"></i><h4>${{ houses|length }}+</h4><p>Properties</p></div></div><div class="col-sm-4"><div class="wel_item"><i class="lnr lnr-book"></i><h4>{{ cities|length }}</h4><p>Cities</p></div></div><div class="col-sm-4"><div class="wel_item"><i class="lnr lnr-users"></i><h4>{{ agents|length }}</h4><p>Agents</p></div></div></div></div></div></div></div></section>
+
+<section class="properties_area" id="properties"><div class="container"><div class="main_title"><h2>Our Top Rated Properties</h2><p>Django'dan kelayotgan haqiqiy uylar ({{ houses|length }} ta) — qo'shish uchun /admin/ → Houses</p></div>
+{% if houses %}
+<div class="row properties_inner">
+{% for h in houses %}
+<div class="col-lg-4"><div class="properties_item"><div class="pp_img">
+{% if h.img %}<img class="img-fluid" src="{{ h.img.url }}" alt="{{ h.title }}">{% else %}<img class="img-fluid" src="{% static 'img/properties/pp-1.jpg' %}" alt="">{% endif %}
+</div><div class="pp_content"><a href="#"><h4>{{ h.title }}</h4></a><div class="tags"><a href="#">{{ h.room_count }} Beds</a><a href="#">{{ h.floor }}/{{ h.floor_count }} Floor</a><a href="#">{{ h.area }} sqm</a><a href="#">{{ h.city.name|default:"—" }}</a></div><p style="font-size:13px;color:#777;margin-top:8px">{{ h.description|truncatechars:80 }}</p><div class="pp_footer"><h5>Total: ${{ h.price }}</h5><a class="main_btn" href="#">{{ h.type }}</a></div></div></div></div>
+{% endfor %}
+</div>
+{% else %}
+<div class="text-center p_30"><p>Hali uylar yo'q — /admin/ da qo'shing. Namuna: Toshkent/Samarqand allaqachon bor (agar ecoverde_db ishlatilsa).</p></div>
+{% endif %}
+</div></section>
+
+<section class="cities_area p_120"><div class="container"><div class="main_title"><h2>Demandable Cities</h2><p>Cities — annotate(house_count=Count('house')) — qancha uy borligi bilan</p></div>
+{% if cities %}
+<div class="row cities_inner">
+{% for c in cities %}
+<div class="col-lg-3 col-md-6"><div class="cities_item">
+{% if c.img %}<img class="img-fluid" src="{{ c.img.url }}" alt="{{ c.name }}">{% else %}<img class="img-fluid" src="{% static 'img/cities/cities-1.jpg' %}" alt="">{% endif %}
+<a class="main_btn2" href="#">{{ c.name }} — {{ c.house_count }} ta uy</a>
+</div></div>
+{% endfor %}
+</div>
+{% else %}
+<p class="text-center">Shaharlar yo'q — /admin/ → Cities</p>
+{% endif %}
+</div></section>
+
+{% if agents %}
+<section class="p_120" style="background:#f9f9ff"><div class="container"><div class="main_title"><h2>Our Agents</h2><p>is_staff=True, is_superuser=False</p></div><div class="row">
+{% for a in agents %}
+<div class="col-lg-3 col-md-6"><div class="text-center p_20"><div style="width:80px;height:80px;line-height:80px;border-radius:50%;background:#0f172a;color:#d4a017;margin:0 auto;font-size:28px;font-weight:800">{{ a.username|slice:":1"|upper }}</div><h5 style="margin-top:12px">{{ a.get_full_name|default:a.username }}</h5><p>@{{ a.username }}</p></div></div>
+{% endfor %}
+</div></div></section>
+{% endif %}
+{% endblock %}
